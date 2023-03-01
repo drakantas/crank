@@ -93,13 +93,13 @@ namespace Microsoft.Crank.Jobs.Bombardier
                 return -1;
             }
 
-            var bombardierFileName = Path.Combine(Path.GetTempPath(), ".crank", bombardierVersion, Path.GetFileName(bombardierUrl));
+            var bombardierFileName = Path.Combine("~", ".crank", bombardierVersion, Path.GetFileName(bombardierUrl));
 
             if (!File.Exists(bombardierFileName))
             {            
                 Directory.CreateDirectory(Path.GetDirectoryName(bombardierFileName));
 
-                Console.WriteLine($"Downloading bombardier from {bombardierUrl} to {bombardierFileName}");
+                Console.WriteLine($"[...] Downloading bombardier from {bombardierUrl} to {bombardierFileName}");
 
                 using (var downloadStream = await _httpClient.GetStreamAsync(bombardierUrl))
                 using (var fileStream = File.Create(bombardierFileName))
@@ -194,8 +194,9 @@ namespace Microsoft.Crank.Jobs.Bombardier
 
                 if (process.ExitCode != 0)
                 {
-                    Console.WriteLine("Failed to run bombardier.");
-                    return process.ExitCode;
+                    Console.WriteLine("Failed to run bombardier. Errors have been printed.");
+                    
+                    return 0;
                 }
             }
             else
