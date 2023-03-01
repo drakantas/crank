@@ -318,6 +318,13 @@ namespace Microsoft.Crank.Jobs.Bombardier
                     Console.WriteLine("Error, retrying: " + e.Message);
                 }
             }
+            
+            while (!process.StandardOutput.EndOfStream)
+            {
+                var line = process.StandardOutput.ReadLine();
+
+                Console.WriteLine(line);
+            }
         }
 
         private static bool TryGetArgumentValue<T>(string argName, List<string> argsList, out T value)
