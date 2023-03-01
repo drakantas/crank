@@ -93,7 +93,7 @@ namespace Microsoft.Crank.Jobs.Bombardier
                 return -1;
             }
 
-            var bombardierFileName = Path.Combine("~", ".crank", bombardierVersion, Path.GetFileName(bombardierUrl));
+            var bombardierFileName = Path.Combine(Path.GetTempPath(), ".crank", bombardierVersion, Path.GetFileName(bombardierUrl));
 
             if (!File.Exists(bombardierFileName))
             {            
@@ -196,7 +196,7 @@ namespace Microsoft.Crank.Jobs.Bombardier
                 {
                     Console.WriteLine("Failed to run bombardier. Errors have been printed.");
                     
-                    return 0;
+                    return process.ExitCode;
                 }
             }
             else
