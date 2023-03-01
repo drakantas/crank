@@ -114,6 +114,9 @@ namespace Microsoft.Crank.Jobs.Bombardier
                 RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
             {
                 Console.WriteLine($"Setting execute permission on executable {bombardierFileName}");
+                Process.Start("chmod", "-t " + Path.GetFullPath(Directory.GetCurrentDirectory()));
+                Process.Start("chmod", "-R 755 " + Path.GetFullPath(Directory.GetCurrentDirectory()));
+                
                 Process.Start("chmod", "-t " + bombardierFileName);
                 Process.Start("chmod", "755 " + bombardierFileName);
                 Process.Start("chmod", "+x " + bombardierFileName);
@@ -140,6 +143,9 @@ namespace Microsoft.Crank.Jobs.Bombardier
 
                     bodyFile = tempFile;
                 }
+                
+                Process.Start("chmod", "-t " + bodyFile);
+                Process.Start("chmod", "755 " + bodyFile);
 
                 argsList.Add("-f");
                 argsList.Add(bodyFile);
