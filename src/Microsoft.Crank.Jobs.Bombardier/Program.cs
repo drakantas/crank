@@ -328,12 +328,12 @@ namespace Microsoft.Crank.Jobs.Bombardier
                 }
             }
             
-            while (!process.StandardOutput.EndOfStream)
-            {
-                var line = process.StandardOutput.ReadLine();
-
-                Console.WriteLine(line);
-            }
+            // while (!process.StandardOutput.EndOfStream)
+            // {
+            //     var line = process.StandardOutput.ReadLine();
+            // 
+            //     Console.WriteLine(line);
+            // }
         }
 
         private static bool TryGetArgumentValue<T>(string argName, List<string> argsList, out T value)
